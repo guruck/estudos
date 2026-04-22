@@ -1,0 +1,19 @@
+services:
+  target:
+    build: ./target
+    container_name: target_audit
+    ports:
+      - "4098:4098"
+    networks:
+      - audit_net
+
+  collector:
+    build: ./collector
+    container_name: collector_audit
+    depends_on:
+      - target
+    networks:
+      - audit_net
+
+networks:
+  audit_net:
